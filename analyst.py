@@ -1,9 +1,10 @@
 def runs_from_lines(lines):
     scoreboard = {}
+    cols =  lines[0].split(",")
     for line in lines[1:]:
         parts = line.split(",")
-        batter = parts[3]
-        runs = int(parts[6])
+        batter = parts[cols.index("striker")]
+        runs = int(parts[cols.index("runs_off_bat")])
         
         if batter in scoreboard:
             scoreboard[batter] += runs
