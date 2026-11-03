@@ -14,10 +14,11 @@ def runs_from_lines(lines):
 
 def team_total(lines):
     total_runs = 0
+    cols = lines[0].split(",")
     for line in lines[1:]:
         parts = line.split(",")
-        runs_off_bat = int(parts[6])
-        extras = int(parts[7])
+        runs_off_bat = int(parts[cols.index("runs_off_bat")])
+        extras = int(parts[cols.index("extras")])
         total_runs += runs_off_bat + extras
     return total_runs
 
