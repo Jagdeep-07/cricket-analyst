@@ -27,3 +27,7 @@ if __name__ == "__main__":
         lines = f.read().splitlines()
     print(runs_from_lines(lines))
     print(team_total(lines))
+
+if __name__ == "__main__":
+    df = pd.read_csv("match.csv")
+    print(top_scorer(df))
