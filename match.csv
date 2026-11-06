@@ -5,3 +5,5 @@ match_id,innings,ball,striker,non_striker,bowler,runs_off_bat,extras
 1001,1,0.4,Gill,Rohit,Starc,6,0
 1001,1,0.5,Gill,Rohit,Starc,0,1
 1001,1,0.6,Gill,Rohit,Starc,2,0
+1001,1,1.1,Rohit,Gill,Cummins,6,0
+1001,1,1.2,Rohit,Gill,Cummins,4,0
