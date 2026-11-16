@@ -6,16 +6,21 @@ load_dotenv()  # puts the key from .env where genai can find it
 
 df = pd.read_csv("match.csv")
 scores = df.groupby("striker")["runs_off_bat"].sum()
+extras = df["extras"].sum()
 top_name = scores.idxmax()
 top_runs = scores.max()
-team_runs = df["runs_off_bat"].sum() + df["extras"].sum()   # ← new
+team_runs = df["runs_off_bat"].sum() + df["extras"].sum()   
 
 
-prompt = f"""Write a 2-sentence cricket match report.
+
+prompt = f""""Write a 2-sentence cricket match report.
 Facts:
 - Top scorer: {top_name} with {top_runs} runs
+- Runs per batter: {scores.to_dict()}
 - Team total: {team_runs}
-Use ONLY these facts. Do not add opinions or guesses."""
+- Extras: {extras}
+Use ONLY these facts. Do not add opinions or guesses.
+"""
 
 client = genai.Client()
 reply = client.interactions.create(model="gemini-3.1-flash-lite", input=prompt)
