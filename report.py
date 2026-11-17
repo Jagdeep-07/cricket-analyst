@@ -9,11 +9,10 @@ scores = df.groupby("striker")["runs_off_bat"].sum()
 extras = df["extras"].sum()
 top_name = scores.idxmax()
 top_runs = scores.max()
-team_runs = df["runs_off_bat"].sum() + df["extras"].sum()   
+team_runs = df["runs_off_bat"].sum() + df["extras"].sum()
 
-
-
-prompt = f""""Write a 2-sentence cricket match report.
+# --- Report ---
+prompt = f"""Write a 2-sentence cricket match report.
 Facts:
 - Top scorer: {top_name} with {top_runs} runs
 - Runs per batter: {scores.to_dict()}
@@ -26,3 +25,17 @@ client = genai.Client()
 reply = client.interactions.create(model="gemini-3.1-flash-lite", input=prompt)
 print(reply.output_text)
 
+# --- Q&A ---
+question = input("Ask about the match: ")
+
+qa_prompt = f"""Answer using ONLY these facts.
+Facts:
+- Runs per batter: {scores.to_dict()}
+- Team total: {team_runs}
+- Extras: {extras}
+If the answer is not in the facts, say "I don't have that data."
+Question: {question}
+"""
+
+answer = client.interactions.create(model="gemini-3.1-flash-lite", input=qa_prompt)
+print(answer.output_text)
