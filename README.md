@@ -1,5 +1,9 @@
 # Cricket Analyst
 
+**Live demo:** https://jagdeep-cricket-analyst.streamlit.app/                              
+
+Ask it about the match. Python counts the facts and Gemini writes the answer, using only those facts.  
+
 This project reads a cricket match CSV file and gives the team total and the runs scored by each batter.
 ## Functions
 
