@@ -10,7 +10,7 @@ scores = df.groupby("striker")["runs_off_bat"].sum()
 extras = df["extras"].sum()
 top_name = scores.idxmax()
 top_runs = scores.max()
-team_runs = df["runs_off_bat"].sum() + df["extras"].sum()
+team_runs = df["runs_off_bat"].sum() + extras
 
 st.title("Cricket Analyst")                   
 
