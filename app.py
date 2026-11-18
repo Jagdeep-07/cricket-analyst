@@ -1,4 +1,4 @@
-import streamlit as st                         # ⭐ new
+import streamlit as st                         
 from dotenv import load_dotenv
 from google import genai
 import pandas as pd
@@ -12,7 +12,7 @@ top_name = scores.idxmax()
 top_runs = scores.max()
 team_runs = df["runs_off_bat"].sum() + df["extras"].sum()
 
-st.title("Cricket Analyst")                   # ⭐ new
+st.title("Cricket Analyst")                   
 
 # --- Report ---
 prompt = f"""Write a 2-sentence cricket match report.
@@ -26,12 +26,12 @@ Use ONLY these facts. Do not add opinions or guesses.
 
 client = genai.Client()
 reply = client.interactions.create(model="gemini-3.1-flash-lite", input=prompt)
-st.write(reply.output_text)                    # ⭐ print → st.write
+st.write(reply.output_text)                   
 
 # --- Q&A ---
-question = st.text_input("Ask about the match:")   # ⭐ input → st.text_input
+question = st.text_input("Ask about the match:")   
 
-if question:                                   # ⭐ new: only ask Gemini once something is typed
+if question:  # skip the AI call until a question is typed                                
     qa_prompt = f"""Answer using ONLY these facts.
 Facts:
 - Runs per batter: {scores.to_dict()}
@@ -41,4 +41,4 @@ If the answer is not in the facts, say "I don't have that data."
 Question: {question}
 """
     answer = client.interactions.create(model="gemini-3.1-flash-lite", input=qa_prompt)
-    st.write(answer.output_text)               # ⭐ print → st.write
+    st.write(answer.output_text)             
