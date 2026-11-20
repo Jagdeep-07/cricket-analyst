@@ -28,3 +28,18 @@ for step in interaction.steps:
         print("Gemini wants:", step.name)
         result = get_team_total()
         print("Python got:", result)
+
+note = {
+    "type": "function_result",
+    "name": step.name,
+    "call_id": step.id,
+    "result": [{"type": "text", "text": str(result)}]
+}
+
+final = client.interactions.create(
+    model="gemini-3.1-flash-lite",
+    previous_interaction_id=interaction.id,
+    tools=[team_total_menu],
+    input=[note],
+    )
+print("Gemini says:", final.output_text)
